@@ -4,7 +4,7 @@ function Timer() {
   const [seconds, setSeconds] = useState(0);
   const [displaySeconds, setDisplaySeconds] = useState(0);
   const [displayMinutes, setDisplayMinutes] = useState(0);
-  const [displayHours, setDisplayHours] = useState(0);
+  const [displayHours, setDisplayHours] = useState(5);
 
   const timerId = useRef();
 
@@ -37,7 +37,7 @@ function Timer() {
 
   useEffect(() => {
     timeDisplay(seconds);
-  }, seconds);
+  }, [seconds]);
 
   return (
     <div>
@@ -45,6 +45,7 @@ function Timer() {
 
       <p>
         time: {displayHours}:{displayMinutes}:{displaySeconds}
+     
       </p>
       <button onClick={startTimer}> Start </button>
       <button onClick={stopTimer}>Stop</button>
