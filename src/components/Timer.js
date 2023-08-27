@@ -6,6 +6,8 @@ function Timer() {
   const [displayMinutes, setDisplayMinutes] = useState(0);
   const [displayHours, setDisplayHours] = useState(5);
   const [start, setStart] = useState(false);
+  const [countUp, setCountUp] = useState(true);
+  const [startTime, setStartTime] = useState(3);
 
   const timerId = useRef();
 
@@ -19,6 +21,26 @@ function Timer() {
     setDisplaySeconds(secs);
     setDisplayMinutes(mins);
     setDisplayHours(hours);
+  }
+
+  function timeDisplayCountdown(totalSeconds) {
+    if (totalSeconds === 0) {
+      stopTimer();
+    }
+
+    const totalMinutes = Math.floor(totalSeconds / 60);
+
+    const secs = totalSeconds % 60;
+    const hours = Math.floor(totalMinutes / 60);
+    const mins = totalMinutes % 60;
+
+    setDisplaySeconds(secs);
+    setDisplayMinutes(mins);
+    setDisplayHours(hours);
+
+    if (displayHours === 0 && displayMinutes == 0 && displaySeconds == 0) {
+      stopTimer();
+    }
   }
 
   const startTimer = () => {
@@ -39,7 +61,11 @@ function Timer() {
   };
 
   useEffect(() => {
-    timeDisplay(seconds);
+    if (countUp) {
+      timeDisplay(seconds);
+    } else {
+      timeDisplayCountdown(startTime - seconds);
+    }
   }, [seconds]);
 
   return (
