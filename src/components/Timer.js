@@ -14,9 +14,10 @@ function Timer() {
   /* for making button switch start/stop */
   const [start, setStart] = useState(false);
   /* for making counter count up or down */
-  const [countUp, setCountUp] = useState(false);
+  const [countUp, setCountUp] = useState(true);
   /* start time when counting down */
-  const [startTime, setStartTime] = useState(0);
+  const [startTime, setStartTime] = useState(500);
+  const [loading, setLoading] = useState(false);
 
   const timerId = useRef();
 
@@ -75,8 +76,10 @@ function Timer() {
   };
 
   /* sets count up or down */
-  const countUpDown = (event) => {
-    setCountUp(event.target.value);
+  const countUpDown = async (event) => {
+    setLoading(true);
+    await setCountUp(event.target.value);
+    setLoading(false);
   };
 
   /* sets start time for count down */
@@ -106,6 +109,14 @@ function Timer() {
   useEffect(() => {
     timeToSeconds();
   }, [inputHours, inputMinutes, inputSeconds]);
+
+  if (loading) {
+    return (
+      <div>
+        <p>...loading</p>
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -137,7 +148,7 @@ function Timer() {
       )}
 
       <label>Stopwatch / Count Down: </label>
-      <select value={false} onChange={countUpDown}>
+      <select value={countUp} onChange={countUpDown}>
         <option value={true}>Stopwatch</option>
         <option value={false}>Count Down</option>
       </select>
