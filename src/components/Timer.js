@@ -102,8 +102,13 @@ function Timer() {
 
   /* sets count up or down */
   const countUpDown = (event) => {
+    if (event.target.value === "countDown"){
+      setCountUp(false)
+    } else if (event.target.value === "stopwatch"){
+      setCountUp(true)
+    }
   
-    setCountUp(event.target.value);
+   
     
   };
 
@@ -119,7 +124,7 @@ function Timer() {
   };
 
   const timeToSeconds = () => {
-    setStartTime(inputHours * 3600 + inputMinutes * 60 + inputSeconds);
+    setStartTime((inputHours * 3600) + (inputMinutes * 60) + (inputSeconds * 1));
 
   };
 
@@ -135,7 +140,7 @@ function Timer() {
     };
 
     const alertTimeToSeconds = () => {
-      setAlertInterval(alertHr * 3600 + alertMins * 60 + alertSecs);
+      setAlertInterval((alertHr * 3600) + (alertMins * 60) + (alertSecs *1));
   
     };
 
@@ -173,7 +178,7 @@ function Timer() {
   return (
     <div>
       <p>(this will be removed for final version) secs: {seconds}</p>
-
+<p>alert time interval: {altertInterval}</p>
       {!start && !countUp ? (
         <form>
           <label>Hr:</label>
@@ -200,8 +205,9 @@ function Timer() {
       )}
 
 
-{!start ? (
+ {!start ? (
         <form>
+          <label>alert every:  </label>
           <label>Hr:</label>
           <input
             type={"number"}
@@ -222,13 +228,12 @@ function Timer() {
           />{" "}
         </form>
       ) : (
-        ""
-      )}
+       <p> alert every:  hr: {alertHr} : mins: {alertMins} : secs: {alertSecs}  </p>    )}
 
       <label>Stopwatch / Count Down: </label>
       <select value={countUp} onChange={countUpDown}>
-        <option value={true}>Stopwatch</option>
-        <option value={false}>Count Down</option>
+        <option value={"stopwatch"}>Stopwatch</option>
+        <option value={"countDown"}>Count Down</option>
       </select>
 
       <p>
