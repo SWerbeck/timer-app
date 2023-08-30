@@ -17,9 +17,18 @@ function Timer() {
   const [countUp, setCountUp] = useState(true);
   /* start time when counting down */
   const [startTime, setStartTime] = useState(500);
-  const [loading, setLoading] = useState(false);
+  /* time interval for alerts */
+  const [altertInterval, setAlertInterval] = useState(0);
+  const [alertSecs, setAlertSecs] = useState(0);
+  const [alertMins, setAlertMins] = useState(0);
+  const [alertHr, setAlertHr] = useState(0);
+ 
 
   const timerId = useRef();
+
+  // .........................................................................
+  // .........................................................................
+ 
 
   /*converts secs to hr:min:sec for count up */
   function timeDisplay(totalSeconds) {
@@ -55,11 +64,27 @@ function Timer() {
     }
   }
 
+
+
   /* starts the counter */
   const startTimer = () => {
+    let counter = 0
     timerId.current = setInterval(() => {
       setSeconds((prev) => (prev += 1));
+      if (altertInterval){
+        if (counter === altertInterval-1){
+          console.log("alert!!!!")
+        }
+        if (counter === altertInterval){
+          
+          counter = 0
+        }
+        counter++
+        console.log(counter)
+      }
+     
     }, 1000);
+ 
     setStart(true);
   };
 
@@ -76,10 +101,10 @@ function Timer() {
   };
 
   /* sets count up or down */
-  const countUpDown = async (event) => {
-    setLoading(true);
-    await setCountUp(event.target.value);
-    setLoading(false);
+  const countUpDown = (event) => {
+  
+    setCountUp(event.target.value);
+    
   };
 
   /* sets start time for count down */
@@ -95,7 +120,32 @@ function Timer() {
 
   const timeToSeconds = () => {
     setStartTime(inputHours * 3600 + inputMinutes * 60 + inputSeconds);
+
   };
+
+    /* sets alert interval time */
+    const handleAlertHr = (event) => {
+      setAlertHr(event.target.value);
+    };
+    const handleAlertMin = (event) => {
+      setAlertMins(event.target.value);
+    };
+    const handleAlertSec = (event) => {
+      setAlertSecs(event.target.value);
+    };
+
+    const alertTimeToSeconds = () => {
+      setAlertInterval(alertHr * 3600 + alertMins * 60 + alertSecs);
+  
+    };
+
+
+
+
+// .........................................................................
+// .........................................................................
+
+
 
   /* watches seconds state and runs timeDisplay function everytime it changes */
   useEffect(() => {
@@ -110,13 +160,15 @@ function Timer() {
     timeToSeconds();
   }, [inputHours, inputMinutes, inputSeconds]);
 
-  if (loading) {
-    return (
-      <div>
-        <p>...loading</p>
-      </div>
-    );
-  }
+  useEffect(() => {
+    alertTimeToSeconds();
+  }, [alertHr, alertMins, alertSecs]);
+
+
+  // .........................................................................
+  // .........................................................................
+
+
 
   return (
     <div>
@@ -141,6 +193,32 @@ function Timer() {
             type={"number"}
             value={inputSeconds}
             onChange={handleStartSeconds}
+          />{" "}
+        </form>
+      ) : (
+        ""
+      )}
+
+
+{!start ? (
+        <form>
+          <label>Hr:</label>
+          <input
+            type={"number"}
+            value={alertHr}
+            onChange={handleAlertHr}
+          />{" "}
+          <label>Min:</label>
+          <input
+            type={"number"}
+            value={alertMins}
+            onChange={handleAlertMin}
+          />{" "}
+          <label>Sec:</label>
+          <input
+            type={"number"}
+            value={alertSecs}
+            onChange={handleAlertSec}
           />{" "}
         </form>
       ) : (
