@@ -14,9 +14,9 @@ function Timer() {
   /* for making button switch start/stop */
   const [start, setStart] = useState(false);
   /* for making counter count up or down */
-  const [countUp, setCountUp] = useState(true);
+  const [countUp, setCountUp] = useState(false);
   /* start time when counting down */
-  const [startTime, setStartTime] = useState(500);
+  const [startTime, setStartTime] = useState(0);
   /* time interval for alerts */
   const [altertInterval, setAlertInterval] = useState(0);
   const [alertSecs, setAlertSecs] = useState(0);
@@ -143,7 +143,13 @@ function Timer() {
       setAlertInterval((alertHr * 3600) + (alertMins * 60) + (alertSecs *1));
   
     };
-
+     
+    const countDownAlert = () => {
+      if (startTime - seconds === 0){
+        console.log("TIME'S UP!!!!")
+        resetTimer()
+      }
+    }
 
 
 
@@ -158,7 +164,9 @@ function Timer() {
       timeDisplay(seconds);
     } else {
       timeDisplayCountdown(startTime - seconds);
+      countDownAlert()
     }
+
   }, [seconds]);
 
   useEffect(() => {
@@ -178,7 +186,7 @@ function Timer() {
   return (
     <div>
       <p>(this will be removed for final version) secs: {seconds}</p>
-<p>alert time interval: {altertInterval}</p>
+
       {!start && !countUp ? (
         <form>
           <label>Hr:</label>
