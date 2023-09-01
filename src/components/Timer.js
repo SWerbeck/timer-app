@@ -1,4 +1,5 @@
 import { React, useState, useRef, useEffect } from "react";
+import ReactSwitch from "react-switch";
 
 function Timer() {
   /* counter everything runs off of */
@@ -14,7 +15,7 @@ function Timer() {
   /* for making button switch start/stop */
   const [start, setStart] = useState(false);
   /* for making counter count up or down */
-  const [countUp, setCountUp] = useState(false);
+  const [countUp, setCountUp] = useState(true);
   /* start time when counting down */
   const [startTime, setStartTime] = useState(0);
   /* time interval for alerts */
@@ -45,8 +46,11 @@ function Timer() {
 
   /*converts secs to hr:min:sec for count down */
   function timeDisplayCountdown(totalSeconds) {
-    if (totalSeconds === 0) {
+
+    if (totalSeconds <= 0) {
       stopTimer();
+    setSeconds(0)
+      
     }
 
     const totalMinutes = Math.floor(totalSeconds / 60);
@@ -69,6 +73,7 @@ function Timer() {
   /* starts the counter */
   const startTimer = () => {
     let counter = 0
+    console.log(startTime)
     timerId.current = setInterval(() => {
       setSeconds((prev) => (prev += 1));
       if (altertInterval){
@@ -101,26 +106,23 @@ function Timer() {
   };
 
   /* sets count up or down */
-  const countUpDown = (event) => {
-    if (event.target.value === "countDown"){
-      setCountUp(false)
-    } else if (event.target.value === "stopwatch"){
-      setCountUp(true)
-    }
-  
-   
-    
+  const countUpDown = (val) => {
+   setCountUp(val)
+   setSeconds(0)
   };
 
   /* sets start time for count down */
   const handleStartHours = (event) => {
-    setInputHours(event.target.value);
+    setInputHours(event.target.value * 1) ;
+    resetTimer()
   };
   const handleStartMinutes = (event) => {
-    setInputMinutes(event.target.value);
+    setInputMinutes(event.target.value * 1);
+    resetTimer()
   };
   const handleStartSeconds = (event) => {
-    setInputSeconds(event.target.value);
+    setInputSeconds(event.target.value * 1);
+    resetTimer()
   };
 
   const timeToSeconds = () => {
@@ -130,13 +132,13 @@ function Timer() {
 
     /* sets alert interval time */
     const handleAlertHr = (event) => {
-      setAlertHr(event.target.value);
+      setAlertHr(event.target.value * 1);
     };
     const handleAlertMin = (event) => {
-      setAlertMins(event.target.value);
+      setAlertMins(event.target.value * 1);
     };
     const handleAlertSec = (event) => {
-      setAlertSecs(event.target.value);
+      setAlertSecs(event.target.value * 1);
     };
 
     const alertTimeToSeconds = () => {
@@ -167,7 +169,7 @@ function Timer() {
       countDownAlert()
     }
 
-  }, [seconds]);
+  }, [seconds, startTime, countUp]);
 
   useEffect(() => {
     timeToSeconds();
@@ -186,6 +188,9 @@ function Timer() {
   return (
     <div>
       <p>(this will be removed for final version) secs: {seconds}</p>
+
+   <h4>Stopwatch / Countdown</h4>
+   <ReactSwitch checked={countUp} onChange={countUpDown}/>
 
       {!start && !countUp ? (
         <form>
@@ -238,11 +243,11 @@ function Timer() {
       ) : (
        <p> alert every:  hr: {alertHr} : mins: {alertMins} : secs: {alertSecs}  </p>    )}
 
-      <label>Stopwatch / Count Down: </label>
+      {/* <label>Stopwatch / Count Down: </label>
       <select value={countUp} onChange={countUpDown}>
         <option value={"stopwatch"}>Stopwatch</option>
         <option value={"countDown"}>Count Down</option>
-      </select>
+      </select> */}
 
       <p>
         time: {displayHours < 10 ? "0" + displayHours : displayHours}:
@@ -262,3 +267,4 @@ function Timer() {
 }
 
 export default Timer;
+
