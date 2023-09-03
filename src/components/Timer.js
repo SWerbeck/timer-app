@@ -144,6 +144,18 @@ function Timer() {
     }
   };
 
+  const clearAlertTime = () => {
+    setAlertSecs(0);
+    setAlertHr(0);
+    setAlertMins(0);
+  };
+
+  const clearCountdownTime = () => {
+    setInputHours(0);
+    setInputMinutes(0);
+    setInputSeconds(0);
+  };
+
   // .........................................................................
   // .........................................................................
 
@@ -170,11 +182,10 @@ function Timer() {
 
   return (
     <div className="timer-container">
-      <p>(this will be removed for final version) secs: {seconds}</p>
-
       <div className="d-flex justify-content-center">
-        <h4>Stopwatch / Countdown</h4>
+        <h4>Countdown </h4>
         <ReactSwitch checked={countUp} onChange={countUpDown} />
+        <h4>Stopwatch </h4>
       </div>
 
       {!start && !countUp ? (
@@ -197,6 +208,13 @@ function Timer() {
             value={inputSeconds}
             onChange={handleStartSeconds}
           />
+          <button
+            onClick={clearCountdownTime}
+            type="button"
+            className="btn btn-danger me-3 btn-lg"
+          >
+            Clear
+          </button>
         </form>
       ) : (
         ""
@@ -223,25 +241,26 @@ function Timer() {
             value={alertSecs}
             onChange={handleAlertSec}
           />{" "}
+          <button
+            onClick={clearAlertTime}
+            type="button"
+            className="btn btn-danger me-3 btn-lg"
+          >
+            Clear
+          </button>
         </form>
       ) : (
-        <p>
+        <div>
           {" "}
           alert every: hr: {alertHr} : mins: {alertMins} : secs: {alertSecs}
-        </p>
+        </div>
       )}
 
-      {/* <label>Stopwatch / Count Down: </label>
-      <select value={countUp} onChange={countUpDown}>
-        <option value={"stopwatch"}>Stopwatch</option>
-        <option value={"countDown"}>Count Down</option>
-      </select> */}
-
-      <p className="d-flex justify-content-center p-5">
+      <div className="d-flex justify-content-center p-5">
         time: {displayHours < 10 ? "0" + displayHours : displayHours}:
         {displayMinutes < 10 ? "0" + displayMinutes : displayMinutes}:
         {displaySeconds < 10 ? "0" + displaySeconds : displaySeconds}
-      </p>
+      </div>
 
       <div className="buttons d-flex justify-content-center p-5">
         {start ? (
