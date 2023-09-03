@@ -183,9 +183,8 @@ function Timer() {
   return (
     <div className="timer-container">
       <div className="d-flex justify-content-center">
-        <h4>Countdown </h4>
+        {countUp ? <p>Countdown</p> : <p>Stopwatch</p>}
         <ReactSwitch checked={countUp} onChange={countUpDown} />
-        <h4>Stopwatch </h4>
       </div>
 
       {!start && !countUp ? (
