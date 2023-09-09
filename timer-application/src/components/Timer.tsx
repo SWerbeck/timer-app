@@ -6,24 +6,24 @@ function Timer() {
   /* counter everything runs off of */
   const [seconds, setSeconds] = useState(0);
   /* hours, minutes and seconds displayed on the page counting up or down */
-  const [displaySeconds, setDisplaySeconds] = useState(0);
-  const [displayMinutes, setDisplayMinutes] = useState(0);
-  const [displayHours, setDisplayHours] = useState(0);
+  const [displaySeconds, setDisplaySeconds] = useState<number>(0);
+  const [displayMinutes, setDisplayMinutes] = useState<number>(0);
+  const [displayHours, setDisplayHours] = useState<number>(0);
   /* input times for countdown*/
-  const [inputHours, setInputHours] = useState(0);
-  const [inputMinutes, setInputMinutes] = useState(0);
-  const [inputSeconds, setInputSeconds] = useState(0);
+  const [inputHours, setInputHours] = useState<number>(0);
+  const [inputMinutes, setInputMinutes] = useState<number>(0);
+  const [inputSeconds, setInputSeconds] = useState<number>(0);
   /* for making button switch start/stop */
-  const [start, setStart] = useState(false);
+  const [start, setStart] = useState<boolean>(false);
   /* for making counter count up or down */
-  const [countUp, setCountUp] = useState(true);
+  const [countUp, setCountUp] = useState<boolean>(true);
   /* start time when counting down */
   const [startTime, setStartTime] = useState(0);
   /* time interval for alerts */
-  const [altertInterval, setAlertInterval] = useState(0);
-  const [alertSecs, setAlertSecs] = useState(0);
-  const [alertMins, setAlertMins] = useState(0);
-  const [alertHr, setAlertHr] = useState(0);
+  const [altertInterval, setAlertInterval] = useState<number>(0);
+  const [alertSecs, setAlertSecs] = useState<number>(0);
+  const [alertMins, setAlertMins] = useState<number>(0);
+  const [alertHr, setAlertHr] = useState<number>(0);
 
   const timerId = useRef();
 
@@ -99,7 +99,7 @@ function Timer() {
   };
 
   /* sets count up or down */
-  const countUpDown = (val: any) => {
+  const countUpDown = (val: boolean) => {
     setCountUp(val);
     setSeconds(0);
   };
