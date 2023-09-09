@@ -25,7 +25,7 @@ function Timer() {
   const [alertMins, setAlertMins] = useState<number>(0);
   const [alertHr, setAlertHr] = useState<number>(0);
 
-  const timerId = useRef();
+  const timerId = useRef<any>(null);
 
   // .........................................................................
   // .........................................................................
@@ -69,19 +69,19 @@ function Timer() {
   const startTimer = () => {
     let counter = 0;
     console.log(startTime);
-    // timerId.current = setInterval(() => {
-    //   setSeconds((prev) => (prev += 1));
-    //   if (altertInterval) {
-    //     if (counter === altertInterval - 1) {
-    //       console.log("alert!!!!");
-    //     }
-    //     if (counter === altertInterval) {
-    //       counter = 0;
-    //     }
-    //     counter++;
-    //     console.log(counter);
-    //   }
-    // }, 1000);
+    timerId.current = setInterval(() => {
+      setSeconds((prev) => (prev += 1));
+      if (altertInterval) {
+        if (counter === altertInterval - 1) {
+          console.log("alert!!!!");
+        }
+        if (counter === altertInterval) {
+          counter = 0;
+        }
+        counter++;
+        console.log(counter);
+      }
+    }, 1000);
 
     setStart(true);
   };
@@ -89,7 +89,7 @@ function Timer() {
   /* stops the counter */
   const stopTimer = () => {
     clearInterval(timerId.current);
-    // timerId.current = 0;
+    timerId.current = 0;
     setStart(false);
   };
 
