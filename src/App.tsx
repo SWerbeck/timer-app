@@ -5,6 +5,7 @@ import Particles from "react-tsparticles";
 import { loadFull } from "tsparticles";
 import { loadSlim } from "tsparticles-slim"; // if you are going to use `loadSlim`, install the "tsparticles-slim" package too.
 import type { Container, Engine } from "tsparticles-engine";
+import useSound from "use-sound";
 
 function App() {
   const particlesInit = useCallback(async (engine: Engine) => {

@@ -1,8 +1,9 @@
 import react, { useState, useRef, useEffect } from "react";
 import ReactSwitch from "react-switch";
 import ".././App.css";
-import alarm from "/Users/stephenwerbeck/projects/timer-app/src/png/alarm.png"
-import stopwatch from "/Users/stephenwerbeck/projects/timer-app/src/png/stopwatch.png"
+import alarm from "../png/alarm.png"
+import stopwatch from "../png/stopwatch.png"
+import useSound from "use-sound";
 
 function Timer() {
   /* counter everything runs off of */
@@ -26,6 +27,8 @@ function Timer() {
   const [alertSecs, setAlertSecs] = useState<number>(0);
   const [alertMins, setAlertMins] = useState<number>(0);
   const [alertHr, setAlertHr] = useState<number>(0);
+
+  
 
   const timerId = useRef<any>(null);
 
@@ -141,6 +144,8 @@ function Timer() {
 
   const countDownAlert = () => {
     if (startTime - seconds === 0) {
+   
+    
       console.log("TIME'S UP!!!!");
       resetTimer();
     }
@@ -184,6 +189,7 @@ function Timer() {
 
   return (
     <div className="timer-container">
+
       <div className="d-flex justify-content-center">
         {countUp ? <p>Countdown</p> : <p>Stopwatch</p>}
         <ReactSwitch   checked={countUp} onChange={countUpDown}   
