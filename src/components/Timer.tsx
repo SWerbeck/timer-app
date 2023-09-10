@@ -1,6 +1,8 @@
 import react, { useState, useRef, useEffect } from "react";
 import ReactSwitch from "react-switch";
 import ".././App.css";
+import alarm from "/Users/stephenwerbeck/projects/timer-app/src/png/alarm.png"
+import stopwatch from "/Users/stephenwerbeck/projects/timer-app/src/png/stopwatch.png"
 
 function Timer() {
   /* counter everything runs off of */
@@ -184,7 +186,43 @@ function Timer() {
     <div className="timer-container">
       <div className="d-flex justify-content-center">
         {countUp ? <p>Countdown</p> : <p>Stopwatch</p>}
-        <ReactSwitch checked={countUp} onChange={countUpDown} />
+        <ReactSwitch   checked={countUp} onChange={countUpDown}   
+        onColor="#ffdfe"
+        onHandleColor="#2693e6"
+        handleDiameter={30}
+        uncheckedIcon={
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "100%",
+              
+              
+            }}
+          >
+            <img style={{height: "12px"}} src={stopwatch}/>
+          </div>
+        }
+        checkedIcon={
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "100%",
+              
+              
+            }}
+          >
+            <img style={{height: "12px"}} src={alarm}/>
+          </div>
+        }
+        boxShadow="0px 1px 5px rgba(0, 0, 0, 0.6)"
+        activeBoxShadow="0px 0px 1px 10px rgba(0, 0, 0, 0.2)"
+        height={20}
+        width={48} 
+        className="switch" />
       </div>
 
       {!start && !countUp ? (
@@ -255,8 +293,8 @@ function Timer() {
         </div>
       )}
 
-      <div className="d-flex justify-content-center p-5">
-        time: {displayHours < 10 ? "0" + displayHours : displayHours}:
+      <div id="displayTime" className="d-flex justify-content-center p-5">
+        {displayHours < 10 ? "0" + displayHours : displayHours}:
         {displayMinutes < 10 ? "0" + displayMinutes : displayMinutes}:
         {displaySeconds < 10 ? "0" + displaySeconds : displaySeconds}
       </div>
