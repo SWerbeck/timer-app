@@ -53,8 +53,9 @@ body {
 }
 
 .timer-container {
-  background-image: url("https://images.unsplash.com/photo-1524678714210-9917a6c619c2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2969&q=80");
-  height: 50vh;
+  background-image: linear-gradient(to bottom right, rgb(56, 164, 231), rgb(186, 223, 245));
+  border-radius: 25px;
+  height: 80vh;
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -62,9 +63,14 @@ body {
   width: 90vw;
   height: 60vh;
   align-items: center;
+  filter: drop-shadow(5px 5px 5px #151829);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .particle-container {
+  
   position: relative;
   width: 100%;
   height: 100vh; /* Adjust the height as needed */
@@ -81,4 +87,89 @@ body {
   justify-content: center;
   align-items: center; /* Add a semi-transparent background to make text more readable */
   /* Add other styling as needed */
+}
+
+
+#displayTime{
+  flex: content;
+  font-size: 100px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  color: rgb(255, 255, 255);
+  font-weight: bold;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: rgb(198, 198, 198);
+  filter: drop-shadow(3px 3px 3px #605d5e);
+
+}
+
+#start{
+  background-image: linear-gradient(to bottom right, rgb(188, 218, 237), rgb(242, 244, 244));
+  color: rgb(91, 176, 255);
+  font-weight: 800;
+  
+  -webkit-text-stroke-color: rgb(0, 0, 0);
+  filter: drop-shadow(3px 3px 3px #5d5f60);
+  
+}
+
+#stop{
+  background-image: linear-gradient(to bottom right, rgb(0, 0, 0), rgb(215, 234, 249));
+  color: rgb(188, 218, 237);
+  font-weight: 800;
+  
+
+  
+}
+
+#reset{
+  background-image: linear-gradient(to bottom right, rgb(102, 102, 102), rgb(215, 234, 249));
+  color: rgb(37, 38, 38);
+  font-weight: 800;
+  
+  -webkit-text-stroke-color: rgb(0, 0, 0);
+  filter: drop-shadow(3px 3px 3px #5d5f60);
+  
+}
+
+.input{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.inputText{
+  color: rgb(32, 32, 32);
+  font-size: 30px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-weight: bold;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: rgb(198, 198, 198);
+  filter: drop-shadow(3px 3px 3px #605d5e);
+
+}
+
+.inputTextWhite{
+  color: rgb(202, 232, 255);
+  font-size: 30px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-weight: bold;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: rgb(198, 198, 198);
+  filter: drop-shadow(3px 3px 3px #605d5e);
+}
+
+#alertEvery{
+  color: rgb(255, 255, 255);
+  font-size: 50px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-weight: bold;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: rgb(198, 198, 198);
+  filter: drop-shadow(3px 3px 3px #605d5e);
+
+}
+
+.switch{
+  offColor: black
 }

@@ -1,6 +1,7 @@
 import { React, useState, useRef, useEffect } from "react";
 import ReactSwitch from "react-switch";
 import ".././App.css";
+import alarm from "/Users/stephenwerbeck/projects/timer-app/src/png/alarm.png"
 
 function Timer() {
   /* counter everything runs off of */
@@ -184,11 +185,48 @@ function Timer() {
     <div className="timer-container">
       <div className="d-flex justify-content-center">
         {countUp ? <p>Countdown</p> : <p>Stopwatch</p>}
-        <ReactSwitch checked={countUp} onChange={countUpDown} />
+        <ReactSwitch 
+        checked={countUp} onChange={countUpDown}   
+        onColor="#ffdfe"
+        onHandleColor="#2693e6"
+        handleDiameter={30}
+        uncheckedIcon={
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "100%",
+              
+              
+            }}
+          >
+            <img style={{height: "12px"}} src={alarm}/>
+          </div>
+        }
+        checkedIcon={
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "100%",
+              
+              
+            }}
+          >
+            <img style={{height: "12px"}} src={alarm}/>
+          </div>
+        }
+        boxShadow="0px 1px 5px rgba(0, 0, 0, 0.6)"
+        activeBoxShadow="0px 0px 1px 10px rgba(0, 0, 0, 0.2)"
+        height={20}
+        width={48} 
+        className="switch" />
       </div>
 
       {!start && !countUp ? (
-        <form className="d-flex justify-content-center">
+        <form  className="d-flex justify-content-center">
           <label>Hr:</label>
           <input
             type={"number"}
@@ -218,23 +256,23 @@ function Timer() {
       ) : (
         ""
       )}
-
+<div className="input">
       {!start ? (
         <form className="d-flex justify-content-center">
-          <label>alert every: </label>
-          <label>Hr:</label>
+          <label id="alertEvery">Alert Every </label>
+          <label className="inputTextWhite">Hr:</label>
           <input
             type={"number"}
             value={alertHr}
             onChange={handleAlertHr}
           />{" "}
-          <label>Min:</label>
+          <label className="inputTextWhite">Min:</label>
           <input
             type={"number"}
             value={alertMins}
             onChange={handleAlertMin}
           />{" "}
-          <label>Sec:</label>
+          <label className="inputTextWhite">Sec:</label>
           <input
             type={"number"}
             value={alertSecs}
@@ -249,21 +287,21 @@ function Timer() {
           </button>
         </form>
       ) : (
-        <div>
+        <div className="inputText">
           {" "}
-          alert every: hr: {alertHr} : mins: {alertMins} : secs: {alertSecs}
+          <p id="alertEvery">Alert Every </p> hr: {alertHr} : mins: {alertMins} : secs: {alertSecs}
         </div>
-      )}
+      )} </div>
 
-      <div className="d-flex justify-content-center p-5">
-        time: {displayHours < 10 ? "0" + displayHours : displayHours}:
+      <div  id="displayTime">
+       {displayHours < 10 ? "0" + displayHours : displayHours}:
         {displayMinutes < 10 ? "0" + displayMinutes : displayMinutes}:
         {displaySeconds < 10 ? "0" + displaySeconds : displaySeconds}
       </div>
 
       <div className="buttons d-flex justify-content-center p-5">
         {start ? (
-          <button
+          <button id="stop"
             onClick={stopTimer}
             type="button"
             className="btn btn-danger me-3 btn-lg"
@@ -271,7 +309,7 @@ function Timer() {
             Stop
           </button>
         ) : (
-          <button
+          <button id="start"
             onClick={startTimer}
             type="button"
             className="btn btn-primary me-3 btn-lg"
@@ -279,9 +317,10 @@ function Timer() {
             Start
           </button>
         )}
-        <button
+        <button id="reset"
           onClick={resetTimer}
           type="button"
+          
           className="btn btn-warning me-3 btn-lg"
         >
           Reset
