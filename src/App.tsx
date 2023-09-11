@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 import "./App.css";
-import Timer from "./components/Timer";
+import Timer from "../src/components/Timer";
 import Particles from "react-tsparticles";
 import { loadFull } from "tsparticles";
 import { loadSlim } from "tsparticles-slim"; // if you are going to use `loadSlim`, install the "tsparticles-slim" package too.
