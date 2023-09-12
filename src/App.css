@@ -1,3 +1,42 @@
+/* .App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+} */
+
 * {
   margin: 0;
   padding: 0;
@@ -31,6 +70,7 @@ body {
 }
 
 .particle-container {
+  
   position: relative;
   width: 100%;
   height: 100vh; /* Adjust the height as needed */
@@ -49,6 +89,7 @@ body {
   /* Add other styling as needed */
 }
 
+
 #displayTime{
   flex: content;
   font-size: 100px;
@@ -59,4 +100,76 @@ body {
   -webkit-text-stroke-color: rgb(198, 198, 198);
   filter: drop-shadow(3px 3px 3px #605d5e);
 
+}
+
+#start{
+  background-image: linear-gradient(to bottom right, rgb(188, 218, 237), rgb(242, 244, 244));
+  color: rgb(91, 176, 255);
+  font-weight: 800;
+  
+  -webkit-text-stroke-color: rgb(0, 0, 0);
+  filter: drop-shadow(3px 3px 3px #5d5f60);
+  
+}
+
+#stop{
+  background-image: linear-gradient(to bottom right, rgb(0, 0, 0), rgb(215, 234, 249));
+  color: rgb(188, 218, 237);
+  font-weight: 800;
+  
+
+  
+}
+
+#reset{
+  background-image: linear-gradient(to bottom right, rgb(102, 102, 102), rgb(215, 234, 249));
+  color: rgb(37, 38, 38);
+  font-weight: 800;
+  
+  -webkit-text-stroke-color: rgb(0, 0, 0);
+  filter: drop-shadow(3px 3px 3px #5d5f60);
+  
+}
+
+.input{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.inputText{
+  color: rgb(32, 32, 32);
+  font-size: 30px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-weight: bold;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: rgb(198, 198, 198);
+  filter: drop-shadow(3px 3px 3px #605d5e);
+
+}
+
+.inputTextWhite{
+  color: rgb(202, 232, 255);
+  font-size: 30px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-weight: bold;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: rgb(198, 198, 198);
+  filter: drop-shadow(3px 3px 3px #605d5e);
+}
+
+#alertEvery{
+  color: rgb(255, 255, 255);
+  font-size: 50px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-weight: bold;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: rgb(198, 198, 198);
+  filter: drop-shadow(3px 3px 3px #605d5e);
+
+}
+
+.color{
+  filter: drop-shadow(3px 3px 3px #fffdfe);
 }

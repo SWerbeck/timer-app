@@ -4,6 +4,9 @@ import ".././App.css";
 import alarm from "../png/alarm.png"
 import stopwatch from "../png/stopwatch.png"
 import useSound from "use-sound";
+import Ding from "../audiofiles/Ding.mp3"
+import schoolbell from "../audiofiles/schoolbell.mp3"
+
 
 function Timer() {
   /* counter everything runs off of */
@@ -73,18 +76,21 @@ function Timer() {
   /* starts the counter */
   const startTimer = () => {
     let counter = 0;
-    console.log(startTime);
+    let counterDown = startTime 
     timerId.current = setInterval(() => {
       setSeconds((prev) => (prev += 1));
       if (altertInterval) {
-        if (counter === altertInterval - 1) {
+        if ((counter === altertInterval - 1) && (counterDown > 1)) {  
+          new Audio(Ding).play()
           console.log("alert!!!!");
+       
         }
         if (counter === altertInterval) {
           counter = 0;
         }
         counter++;
-        console.log(counter);
+        counterDown -= 1
+        
       }
     }, 1000);
 
@@ -142,10 +148,12 @@ function Timer() {
     setAlertInterval(alertHr * 3600 + alertMins * 60 + alertSecs * 1);
   };
 
+  
+
   const countDownAlert = () => {
-    if (startTime - seconds === 0) {
-   
-    
+    if ((startTime - seconds === 0) && (seconds !== 0)) {
+       
+      new Audio(schoolbell).play()
       console.log("TIME'S UP!!!!");
       resetTimer();
     }
