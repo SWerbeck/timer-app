@@ -32,8 +32,13 @@ function Timer() {
   const [alertSecs, setAlertSecs] = useState<number>(0);
   const [alertMins, setAlertMins] = useState<number>(0);
   const [alertHr, setAlertHr] = useState<number>(0);
+  const [displayAlertHr, setDisplayAlertHr] = useState<number>(0);
+  const [displayAlertMin, setDisplayAlertMin] = useState<number>(0);
+  const [displayAlertSec, setDisplayAlertSec] = useState<number>(0);
 
-  
+
+
+
 
   const timerId = useRef<any>(null);
 
@@ -127,15 +132,15 @@ function Timer() {
 
   /* sets start time for count down */
   const handleStartHours = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInputHours(Number(event.target.value));
+    setInputHours(Number(event.target.value)*1);
     resetTimer();
   };
   const handleStartMinutes = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInputMinutes(Number(event.target.value));
+    setInputMinutes(Number(event.target.value)*1);
     resetTimer();
   };
   const handleStartSeconds = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInputSeconds(Number(event.target.value));
+    setInputSeconds(Number(event.target.value)*1);
     resetTimer();
   };
 
@@ -145,19 +150,30 @@ function Timer() {
 
   /* sets alert interval time */
   const handleAlertHr = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setAlertHr(Number(event.target.value));
+    setAlertHr(Number(event.target.value)*1);
   };
   const handleAlertMin = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setAlertMins(Number(event.target.value));
+    setAlertMins(Number(event.target.value)*1);
   };
   const handleAlertSec = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setAlertSecs(Number(event.target.value));
+    setAlertSecs(Number(event.target.value)*1);
   };
 
   const alertTimeToSeconds = () => {
     setAlertInterval(alertHr * 3600 + alertMins * 60 + alertSecs * 1);
   };
 
+  function alertTimeDisplay(totalSeconds: number) {
+    const totalMinutes = Math.floor(totalSeconds / 60);
+
+    const secs = totalSeconds % 60;
+    const hours = Math.floor(totalMinutes / 60);
+    const mins = totalMinutes % 60;
+
+    setDisplayAlertSec(secs);
+    setDisplayAlertMin(mins);
+    setDisplayAlertHr(hours);
+  }
   
 
   const countDownAlert = () => {
@@ -173,6 +189,7 @@ function Timer() {
     setAlertSecs(0);
     setAlertHr(0);
     setAlertMins(0);
+    
   };
 
   const clearCountdownTime = () => {
@@ -180,6 +197,9 @@ function Timer() {
     setInputMinutes(0);
     setInputSeconds(0);
   };
+
+ 
+  
 
   // .........................................................................
   // .........................................................................
@@ -202,12 +222,21 @@ function Timer() {
     alertTimeToSeconds();
   }, [alertHr, alertMins, alertSecs]);
 
+  useEffect(() => {
+    alertTimeDisplay(altertInterval)
+  },[altertInterval])
+
+  
+
   // .........................................................................
   // .........................................................................
 
   return (
+    
     <div className="timer-container">
 
+      
+    
       <div className="d-flex justify-content-center">
         {countUp ? <p>Countdown</p> : <p>Stopwatch</p>}
         <ReactSwitch   checked={countUp} onChange={countUpDown}   
@@ -252,27 +281,33 @@ function Timer() {
       {!start && !countUp ? (
         <form className="d-flex justify-content-center">
           <label>Hr:</label>
-          <input
+          <input  style={{width: "70px", borderRadius: "8px", borderColor: "red"}} 
             type={"number"}
-            value={inputHours}
+            value = {startTime ? inputHours : undefined}
+            placeholder= {inputHours ? undefined : "00"}
+            
             onChange={handleStartHours}
+            
           />
           <label>Min:</label>
           <input
             type={"number"}
-            value={inputMinutes}
+            
+            value = {startTime ? inputMinutes : undefined}
+            placeholder= {inputMinutes ? undefined : "00"}
             onChange={handleStartMinutes}
           />
           <label>Sec:</label>
           <input
             type={"number"}
-            value={inputSeconds}
+            value = {startTime ? inputSeconds : undefined}
+            placeholder= {inputSeconds ? undefined : "00"}
             onChange={handleStartSeconds}
           />
           <button
             onClick={clearCountdownTime}
             type="button"
-            className="btn btn-danger me-3 btn-lg"
+            className=""
           >
             Clear
           </button>
@@ -280,43 +315,50 @@ function Timer() {
       ) : (
         ""
       )}
-
+<div className="alertContainer">
       {!start ? (
-        <form className="d-flex justify-content-center">
-          <label>alert every: </label>
-          <label>Hr:</label>
-          <input
+        <form >
+         <div> <label>alert every: </label></div>
+         <div><label>Hr:</label>
+          <input 
             type={"number"}
-            value={alertHr}
+            // value = {altertInterval ? alertHr : undefined}
+            // placeholder= {altertInterval ? undefined : "00"}
+            // {altertInterval ? {value = alertHr} : {placeholder = "00"}}
+            {...(altertInterval) ?  {value : alertHr} : {placeholder : "00"}}
             onChange={handleAlertHr}
-          />{" "}
-          <label>Min:</label>
+          />{" "}</div> 
+         <div> <label>Min:</label>
           <input
             type={"number"}
-            value={alertMins}
+            // value = {altertInterval ? alertMins : undefined}
+            // placeholder= {alertMins ? undefined : "00"}
+            {...(altertInterval) ?  {value : alertMins} : {placeholder : "00"}}
             onChange={handleAlertMin}
-          />{" "}
-          <label>Sec:</label>
+          />{" "}</div> 
+         <div> <label>Sec:</label>
           <input
             type={"number"}
-            value={alertSecs}
+            // value = {altertInterval ? alertSecs : undefined}
+            // placeholder= {alertSecs? undefined : "00"}
+            {...(altertInterval) ?  {value : alertSecs} : {placeholder : "00"}}
             onChange={handleAlertSec}
-          />{" "}
-          <button
+          />{" "}</div> 
+         <div> <button
             onClick={clearAlertTime}
             type="button"
-            className="btn btn-danger me-3 btn-lg"
+            className=""
           >
             Clear
-          </button>
+          </button> </div> 
         </form>
       ) : (
         <div>
           {" "}
-          alert every: hr: {alertHr} : mins: {alertMins} : secs: {alertSecs}
+          alert every: hr: {displayAlertHr < 10 ? "0" + displayAlertHr : displayAlertHr} : mins: {displayAlertMin < 10 ? "0" + displayAlertMin : displayAlertMin}  : secs: {displayAlertSec < 10 ? "0" + displayAlertSec : displayAlertSec} 
         </div>
-      )}
-
+      )}</div>
+     <div id="timeandbuttons">
       <div id="displayTime" className="d-flex justify-content-center p-5">
         {displayHours < 10 ? "0" + displayHours : displayHours}:
         {displayMinutes < 10 ? "0" + displayMinutes : displayMinutes}:
@@ -328,7 +370,7 @@ function Timer() {
           <button
             onClick={stopTimer}
             type="button"
-            className="btn btn-danger me-3 btn-lg"
+            className=""
           >
             Stop
           </button>
@@ -336,7 +378,7 @@ function Timer() {
           <button
             onClick={startTimer}
             type="button"
-            className="btn btn-primary me-3 btn-lg"
+            className=""
           >
             Start
           </button>
@@ -344,12 +386,13 @@ function Timer() {
         <button
           onClick={resetTimer}
           type="button"
-          className="btn btn-warning me-3 btn-lg"
+          className=""
         >
           Reset
         </button>
       </div>
     </div>
+    </div> 
   );
 }
 
