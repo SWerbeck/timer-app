@@ -8,6 +8,7 @@ import Ding from "../audiofiles/Ding.mp3"
 import schoolbell from "../audiofiles/schoolbell.mp3"
 import ALARM from "../audiofiles/ALARM.wav"
 import ALERT1 from "../audiofiles/ALERT1.wav"
+import useStayAwake from "use-stay-awake";
 
 
 function Timer() {
@@ -41,6 +42,7 @@ function Timer() {
 
 
   const timerId = useRef<any>(null);
+  const device = useStayAwake()
 
   // .........................................................................
   // .........................................................................
@@ -82,6 +84,7 @@ function Timer() {
 
   /* starts the counter */
   const startTimer = () => {
+    device.preventSleeping()
     let counter = 0;
     let counterDown = startTime 
     timerId.current = setInterval(() => {
@@ -114,6 +117,7 @@ function Timer() {
 
   /* stops the counter */
   const stopTimer = () => {
+    device.allowSleeping()
     clearInterval(timerId.current);
     timerId.current = 0;
     setStart(false);
@@ -232,16 +236,20 @@ function Timer() {
   // .........................................................................
 
   return (
+
+
     
     <div className="timer-container">
 
       
     
-      <div className="d-flex justify-content-center">
-        {countUp ? <p>Countdown</p> : <p>Stopwatch</p>}
+      <div className="switch">
+        <div className="switchText">{countUp ? <p>Switch to Countdown</p> : <p>Switch to Stopwatch</p>}</div>
         <ReactSwitch   checked={countUp} onChange={countUpDown}   
-        onColor="#ffdfe"
-        onHandleColor="#2693e6"
+        onColor="#7bb702"
+        offColor="#ffffff"
+        onHandleColor="#ffffff"
+        offHandleColor="#7bb702"
         handleDiameter={30}
         uncheckedIcon={
           <div
@@ -250,6 +258,7 @@ function Timer() {
               justifyContent: "center",
               alignItems: "center",
               height: "100%",
+            
               
               
             }}
@@ -266,6 +275,7 @@ function Timer() {
               height: "100%",
               
               
+              
             }}
           >
             <img style={{height: "12px"}} src={alarm}/>
@@ -278,49 +288,13 @@ function Timer() {
         className="switch" />
       </div>
 
-      {!start && !countUp ? (
-        <form className="d-flex justify-content-center">
-          <label>Hr:</label>
-          <input  style={{width: "70px", borderRadius: "8px", borderColor: "red"}} 
-            type={"number"}
-            value = {startTime ? inputHours : undefined}
-            placeholder= {inputHours ? undefined : "00"}
-            
-            onChange={handleStartHours}
-            
-          />
-          <label>Min:</label>
-          <input
-            type={"number"}
-            
-            value = {startTime ? inputMinutes : undefined}
-            placeholder= {inputMinutes ? undefined : "00"}
-            onChange={handleStartMinutes}
-          />
-          <label>Sec:</label>
-          <input
-            type={"number"}
-            value = {startTime ? inputSeconds : undefined}
-            placeholder= {inputSeconds ? undefined : "00"}
-            onChange={handleStartSeconds}
-          />
-          <button
-            onClick={clearCountdownTime}
-            type="button"
-            className=""
-          >
-            Clear
-          </button>
-        </form>
-      ) : (
-        ""
-      )}
+      
 <div className="alertContainer">
       {!start ? (
         <form >
          <div> <label>alert every: </label></div>
          <div><label>Hr:</label>
-          <input 
+          <input className="inputBox"
             type={"number"}
             // value = {altertInterval ? alertHr : undefined}
             // placeholder= {altertInterval ? undefined : "00"}
@@ -328,23 +302,23 @@ function Timer() {
             {...(altertInterval) ?  {value : alertHr} : {placeholder : "00"}}
             onChange={handleAlertHr}
           />{" "}</div> 
-         <div> <label>Min:</label>
-          <input
+         <div className="mins"> <label>Min:</label>
+          <input className="inputBox"
             type={"number"}
             // value = {altertInterval ? alertMins : undefined}
             // placeholder= {alertMins ? undefined : "00"}
             {...(altertInterval) ?  {value : alertMins} : {placeholder : "00"}}
             onChange={handleAlertMin}
           />{" "}</div> 
-         <div> <label>Sec:</label>
-          <input
+         <div className="secs"> <label>Sec:</label>
+          <input className="inputBox"
             type={"number"}
             // value = {altertInterval ? alertSecs : undefined}
             // placeholder= {alertSecs? undefined : "00"}
             {...(altertInterval) ?  {value : alertSecs} : {placeholder : "00"}}
             onChange={handleAlertSec}
           />{" "}</div> 
-         <div> <button
+         <div> <button id="clearbutton"
             onClick={clearAlertTime}
             type="button"
             className=""
@@ -354,8 +328,7 @@ function Timer() {
         </form>
       ) : (
         <div>
-          {" "}
-          alert every: hr: {displayAlertHr < 10 ? "0" + displayAlertHr : displayAlertHr} : mins: {displayAlertMin < 10 ? "0" + displayAlertMin : displayAlertMin}  : secs: {displayAlertSec < 10 ? "0" + displayAlertSec : displayAlertSec} 
+          <div>alert every: </div> <div>hr: {displayAlertHr < 10 ? "0" + displayAlertHr : displayAlertHr}</div> <div> mins: {displayAlertMin < 10 ? "0" + displayAlertMin : displayAlertMin}  </div> <div> secs: {displayAlertSec < 10 ? "0" + displayAlertSec : displayAlertSec} </div>
         </div>
       )}</div>
      <div id="timeandbuttons">
@@ -363,11 +336,13 @@ function Timer() {
         {displayHours < 10 ? "0" + displayHours : displayHours}:
         {displayMinutes < 10 ? "0" + displayMinutes : displayMinutes}:
         {displaySeconds < 10 ? "0" + displaySeconds : displaySeconds}
+
+        
       </div>
 
-      <div className="buttons d-flex justify-content-center p-5">
+      <div className="buttons">
         {start ? (
-          <button
+          <button id="stopbutton"
             onClick={stopTimer}
             type="button"
             className=""
@@ -375,7 +350,7 @@ function Timer() {
             Stop
           </button>
         ) : (
-          <button
+          <button id="startbutton"
             onClick={startTimer}
             type="button"
             className=""
@@ -383,7 +358,7 @@ function Timer() {
             Start
           </button>
         )}
-        <button
+        <button id="resetbutton"
           onClick={resetTimer}
           type="button"
           className=""
@@ -391,7 +366,53 @@ function Timer() {
           Reset
         </button>
       </div>
+
+
+      {!start && !countUp ? (
+        <div className="countdownContainer">
+          <div id="fade"> <label>start countdown from: </label></div>
+        <form >
+          <div id="fade" className="inputboxes">
+          <div id="fade"><label>Hr:</label>
+          <input id="fade" className="inputBox"
+            type={"number"}
+            value = {startTime ? inputHours : undefined}
+            placeholder= {inputHours ? undefined : "00"}
+            
+            onChange={handleStartHours}
+            
+          /></div>
+          <div id="fade" className="mins"><label>Min:</label>
+          <input id="fade" className="inputBox"
+            type={"number"}
+            
+            value = {startTime ? inputMinutes : undefined}
+            placeholder= {inputMinutes ? undefined : "00"}
+            onChange={handleStartMinutes}
+          /></div>
+         <div id="fade" className="secs"> <label>Sec:</label>
+         <input id="fade" className="inputBox"
+            type={"number"}
+            value = {startTime ? inputSeconds : undefined}
+            placeholder= {inputSeconds ? undefined : "00"}
+            onChange={handleStartSeconds}
+          /></div></div>
+         <div id="fade"><button id="clearbutton"
+            onClick={clearCountdownTime}
+            type="button"
+            className=""
+          >
+            Clear
+          </button></div>
+        </form>
+        </div>
+      ) : (
+        ""
+      )}
+
+     
     </div>
+    
     </div> 
   );
 }
