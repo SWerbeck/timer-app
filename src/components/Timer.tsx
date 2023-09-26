@@ -327,8 +327,8 @@ function Timer() {
           </button> </div> 
         </form>
       ) : (
-        <div>
-          <div>alert every: </div> <div>hr: {displayAlertHr < 10 ? "0" + displayAlertHr : displayAlertHr}</div> <div> mins: {displayAlertMin < 10 ? "0" + displayAlertMin : displayAlertMin}  </div> <div> secs: {displayAlertSec < 10 ? "0" + displayAlertSec : displayAlertSec} </div>
+        <div className="alerttext">
+          <div>alert every: </div>{displayAlertHr < 10 ? "0" + displayAlertHr : displayAlertHr} : {displayAlertMin < 10 ? "0" + displayAlertMin : displayAlertMin} : {displayAlertSec < 10 ? "0" + displayAlertSec : displayAlertSec} 
         </div>
       )}</div>
      <div id="timeandbuttons">
@@ -340,9 +340,10 @@ function Timer() {
         
       </div>
 
-      <div className="buttons">
+      
         {start ? (
           <button id="stopbutton"
+          
             onClick={stopTimer}
             type="button"
             className=""
@@ -351,21 +352,23 @@ function Timer() {
           </button>
         ) : (
           <button id="startbutton"
+          
             onClick={startTimer}
             type="button"
             className=""
           >
-            Start
+                Start    
           </button>
         )}
         <button id="resetbutton"
+        
           onClick={resetTimer}
           type="button"
           className=""
         >
           Reset
         </button>
-      </div>
+     
 
 
       {!start && !countUp ? (

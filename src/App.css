@@ -230,13 +230,13 @@ label{
   align-items: center;
   /* background-image: linear-gradient(to bottom right, rgb(0, 0, 0), rgb(242, 244, 244)); */
   background-color: #65799b;
-  height: 210px;
+  height: 200px;
   width: 300px;
   border: 20px;
   filter: drop-shadow(10px 20px 3px #5d5f60);
   position: relative;
   right: -310px;
-  top: -595px;
+  top: -620px;
   animation-name: grow;
   animation-duration: .3s;
   animation-timing-function: ease-in;
@@ -308,7 +308,7 @@ label{
 
 #fade {
   animation-name: fadeIn;
-  animation-duration: 1s;
+  animation-duration: 1.2s;
   animation-timing-function: ease-in-out;
   animation-delay: 0s;
   animation-iteration-count: 1;
@@ -335,16 +335,125 @@ label{
 }
 
 
-.buttons{
-  display: flex;
-  flex-direction: row;
+/* .buttons{
+  height: auto;
+  width: 800px;
   position: relative;
   bottom: 210px;
   left: 170px;
-}
+} */
 
 #clearbutton{
   color: #d7e4eb;
   background-color: #7bb702;
+  width: 70px;
   margin: 10px;
+  position: relative;
+  left: 15px;
+}
+
+#clearbutton:hover{
+  position: relative;
+ 
+  filter: drop-shadow(3px 3px 1px #605d5e);
+ }
+
+ #clearbutton:active{
+  position: relative;
+  
+  filter: drop-shadow(0px 0px 0px #605d5e);
+ }
+
+#clearbutton2{
+  color: #d7e4eb;
+  background-color: #7bb702;
+  width: 70px;
+  margin: 10px;
+  position: relative;
+  left: 15px;
+}
+
+#startbutton{
+  color:#65799b;
+  border-color: #fffdfe;
+  font-weight: bold;
+  margin: 3px;
+  height: 50px;
+  width: 80px;
+ position: relative;
+ top: -200px;
+ left: 120px
+}
+#startbutton:hover{
+  position: relative;
+  top: -202px;
+  filter: drop-shadow(3px 3px 1px #605d5e);
+ }
+
+ #startbutton:active{
+  position: relative;
+  top: -202px;
+  filter: drop-shadow(0px 0px 0px #605d5e);
+ }
+
+#stopbutton{
+  background-color: #65799b;
+  border-color: #65799b;
+  color: #d7e4eb;
+  font-weight: bold;
+  margin: 3px;
+  height: 50px;
+  width: 80px;
+ position: relative;
+ top: -200px;
+ left: 120px
+}
+
+#stopbutton:hover{
+  position: relative;
+  top: -202px;
+  filter: drop-shadow(3px 3px 1px #605d5e);
+ }
+
+ #stopbutton:active{
+  position: relative;
+  top: -202px;
+  filter: drop-shadow(0px 0px 0px #605d5e);
+ }
+
+#resetbutton{
+  background-color: #7bb702;
+  color: #d7e4eb;
+  font-weight: bold;
+  margin: 3px;
+  height: 50px;
+  width: 80px;
+  position: relative;
+  top: -200px;
+ left: 140px;
+ border-color:#7bb702;
+  
+}
+#resetbutton:hover{
+  position: relative;
+  top: -202px;
+  filter: drop-shadow(3px 3px 1px #605d5e);
+ }
+
+ #resetbutton:active{
+  position: relative;
+  top: -202px;
+  filter: drop-shadow(0px 0px 0px #605d5e);
+  
+ }
+
+.alerttext{
+  font-size: 50px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  color: #d7e4eb;
+  font-weight: bold;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: rgb(198, 198, 198);
+  filter: drop-shadow(3px 3px 3px #605d5e);
+  margin: 24px;
 }
