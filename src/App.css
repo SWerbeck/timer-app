@@ -364,14 +364,7 @@ label{
   filter: drop-shadow(0px 0px 0px #605d5e);
  }
 
-#clearbutton2{
-  color: #d7e4eb;
-  background-color: #7bb702;
-  width: 70px;
-  margin: 10px;
-  position: relative;
-  left: 15px;
-}
+
 
 #startbutton{
   color:#65799b;
@@ -460,6 +453,10 @@ label{
 
 
 @media screen and (max-width: 720px) {
+
+  .headline{
+    font-size: 40px;
+  }
  
   .alertContainer{
     height: 150px;
@@ -473,8 +470,8 @@ label{
     height: 150px;
     width: 200px;
     position: relative;
-    right: 55px;
-    top: -200px;
+    right: -170px;
+    top: -568px;
 
   }
   .timer-container{
@@ -484,23 +481,133 @@ label{
     font-size: 70px;
     position: relative;
     left: -10px;
+    top: -110px
   }
 
   #resetbutton{
     height: 30px;
   width: 60px;
   position: relative;
-  top: -210px;
+  top: -150px;
  left: 95px;
 
   }
+
+  #resetbutton:hover{
+    position: relative;
+    top: -152px;
+    filter: drop-shadow(3px 3px 1px #605d5e);
+   }
+  
+   #resetbutton:active{
+    position: relative;
+    top: -152px;
+    filter: drop-shadow(0px 0px 0px #605d5e);
+    
+   }
+
+  
   #startbutton{
     height: 30px;
   width: 60px;
   position: relative;
-  top: -210px;
+  top: -150px;
  left: 90px;
 
   }
+
+  #startbutton:hover{
+    position: relative;
+    top: -152px;
+    filter: drop-shadow(3px 3px 1px #605d5e);
+   }
+  
+   #startbutton:active{
+    position: relative;
+    top: -152px;
+    filter: drop-shadow(0px 0px 0px #605d5e);
+    
+   }
+
+  
+  #stopbutton{
+    height: 30px;
+  width: 60px;
+  position: relative;
+  top: -150px;
+ left: 90px;
+
+  }
+
+  #stopbutton:hover{
+    position: relative;
+    top: -152px;
+    filter: drop-shadow(3px 3px 1px #605d5e);
+   }
+  
+   #stopbutton:active{
+    position: relative;
+    top: -152px;
+    filter: drop-shadow(0px 0px 0px #605d5e);
+    
+   }
+
+  .switch{
+    position: relative;
+    top: 30px;
+  }
+  
+  .switchText{
+   
+    position: relative;
+    top: 40px;
+  
+  }
+
+  .alerttext{
+    font-size: 34px;
+   
+  }
+
+  label{
+    font-size: 17px;
+    font-family:serif;
+    color: rgb(255, 255, 255);
+    border: #151829;
+    border-radius: 10px;
+    filter: drop-shadow(3px 3px 1px #605d5e);
+  }
+
+  .mins{
+    position: relative;
+    left: -11px
+  }
+
+  .secs{
+    position: relative;
+    left: -7px
+  }
+
+  #clearbutton{
+    color: #d7e4eb;
+    background-color: #7bb702;
+    width: 60px;
+    margin: 5px;
+    position: relative;
+    left: 11px;
+  }
+  
+  #clearbutton:hover{
+    position: relative;
+   
+    filter: drop-shadow(3px 3px 1px #605d5e);
+   }
+  
+   #clearbutton:active{
+    position: relative;
+    
+    filter: drop-shadow(0px 0px 0px #605d5e);
+   }
+
   
 }
