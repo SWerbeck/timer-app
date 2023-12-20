@@ -117,7 +117,7 @@ function Timer() {
 
   /* stops the counter */
   const stopTimer = () => {
-    device.allowSleeping()
+    // device.allowSleeping()
     clearInterval(timerId.current);
     timerId.current = 0;
     setStart(false);
