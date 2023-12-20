@@ -84,7 +84,7 @@ function Timer() {
 
   /* starts the counter */
   const startTimer = () => {
-    device.preventSleeping()
+    // device.preventSleeping()
     let counter = 0;
     let counterDown = startTime 
     timerId.current = setInterval(() => {
