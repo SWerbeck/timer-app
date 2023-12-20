@@ -8,7 +8,7 @@ import Ding from "../audiofiles/Ding.mp3"
 import schoolbell from "../audiofiles/schoolbell.mp3"
 import ALARM from "../audiofiles/ALARM.wav"
 import ALERT1 from "../audiofiles/ALERT1.wav"
-import useStayAwake from "use-stay-awake";
+// import useStayAwake from "use-stay-awake";
 
 
 function Timer() {
@@ -42,7 +42,7 @@ function Timer() {
 
 
   const timerId = useRef<any>(null);
-  const device = useStayAwake()
+  // const device = useStayAwake()
 
   // .........................................................................
   // .........................................................................
